@@ -22,20 +22,37 @@ MongoClient.connect(connectionURL, { useNewUrlParser : true } , (error , client)
 //         }
 //         console.log(result.insertedId);
 //     })
-    db.collection('Users').insertMany([
+    // db.collection('Users').insertMany([
+    //     {
+    //         name : 'Jen',
+    //         age : 21,
+    //     } , {
+    //         name : 'Gunther',
+    //         age : 19
+    //     }
+    // ] , (error , result) => {
+    //     if (error) {
+    //         return console.log('Unable to insert documents!');
+    //     }
+    //     console.log(result.insertedIds);
+    // })
+    db.collection('Tasks').insertMany([
         {
-            name : 'Jen',
-            age : 21,
+            description : 'Complete the Course',
+            completed : false 
         } , {
-            name : 'Gunther',
-            age : 19
+            description : 'Go to Birthday',
+            completed : false
+        }, {
+            description : 'Pick up uncle',
+            completed : true 
         }
     ] , (error , result) => {
-        if (error) {
-            return console.log('Unable to insert documents!');
-        }
+        if (error){
+            return console.log('Unable to connect to the database');
+        } 
+        
         console.log(result.insertedIds);
     })
-
 
 })
