@@ -18,13 +18,13 @@ MongoClient.connect(connectionURL, { useNewUrlParser : true } , (error , client)
 
     const db = client.db(databaseName)
 
-    db.collection('Users').findOne({__id : new ObjectId("61741f6521c029cd95d61583")} ,(error , user) => {
-        if( error ){
-            return console.log('Unable to Fetch');
-        }
+    // db.collection('Users').findOne({__id : new ObjectId("61741f6521c029cd95d61583")} ,(error , user) => {
+    //     if( error ){
+    //         return console.log('Unable to Fetch');
+    //     }
 
-        console.log(user);
-    })
+    //     console.log(user);
+    // })
 
     db.collection('Users').find({ age : 20 }).toArray((error , users) => {
         if(error){
@@ -32,5 +32,12 @@ MongoClient.connect(connectionURL, { useNewUrlParser : true } , (error , client)
         }
         console.log(users);
     })
+    db.collection('Users').find({ age : 20 }).count((error , count) => {
+        if(error){
+            return console.log('Unable to fetch');
+        }
+        console.log(count);
+    })
+
    
 })
