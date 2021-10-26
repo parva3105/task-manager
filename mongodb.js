@@ -38,11 +38,17 @@ MongoClient.connect(connectionURL, { useNewUrlParser : true } , (error , client)
     //     }
     //     console.log(count);
     // })
-    db.collection('Tasks').findOne({_id : new ObjectId("6174210f9264aac27ace0345")}, (error , result) => {
+    // db.collection('Tasks').findOne({_id : new ObjectId("6174210f9264aac27ace0345")}, (error , result) => {
+    //     if(error){
+    //         return console.log('Unable to fetch');
+    //     }
+    //     console.log(result);
+    // } )
+    db.collection('Tasks').find({completed : false }).toArray((error , tasks) => {
         if(error){
-            return console.log('Unable to fetch');
+            return console.log('Unable to fetch data from database');
         }
-        console.log(result);
-    } )
-   
+
+        console.log(tasks);
+    })
 })
