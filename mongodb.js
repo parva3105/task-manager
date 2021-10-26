@@ -4,62 +4,33 @@
 // const MongoClient = mongodb.MongoClient
 // const ObjectId = mongodb.ObjectId
 
-const { MongoClient , ObjectId} = require('mongodb') //Shorthand Expression
+//Shorthand Expression
+const { MongoClient , ObjectId } =require('mongodb')
 
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'task-manager'
 
-const id = new ObjectId()
-console.log(id.id);
 
 MongoClient.connect(connectionURL, { useNewUrlParser : true } , (error , client) => {
     if(error) {
         return console.log('Unable to connect to Database !');
     }    
 
-    // const db = client.db(databaseName)
+    const db = client.db(databaseName)
 
-    //  db.collection('Users').insertOne({
-    //      _id : id,
-    //      name: 'Parva',
-    //      age : 20
-    //  } , (error , result) => {
-    //      if (error) {
-    //          return console.log('Unable to Insert user data');
-    //      }
-    //      console.log(result.insertedId);
-    //  })
-    // db.collection('Users').insertMany([
-    //     {
-    //         name : 'Jen',
-    //         age : 21,
-    //     } , {
-    //         name : 'Gunther',
-    //         age : 19
-    //     }
-    // ] , (error , result) => {
-    //     if (error) {
-    //         return console.log('Unable to insert documents!');
-    //     }
-    //     console.log(result.insertedIds);
-    // })
-    // db.collection('Tasks').insertMany([
-    //     {
-    //         description : 'Complete the Course',
-    //         completed : false 
-    //     } , {
-    //         description : 'Go to Birthday',
-    //         completed : false
-    //     }, {
-    //         description : 'Pick up uncle',
-    //         completed : true 
-    //     }
-    // ] , (error , result) => {
-    //     if (error){
-    //         return console.log('Unable to connect to the database');
-    //     } 
-        
-    //     console.log(result.insertedIds);
-    // })
+    db.collection('Users').findOne({__id : new ObjectId("61741f6521c029cd95d61583")} ,(error , user) => {
+        if( error ){
+            return console.log('Unable to Fetch');
+        }
 
+        console.log(user);
+    })
+
+    db.collection('Users').find({ age : 20 }).toArray((error , users) => {
+        if(error){
+            return console.log('Unable to fetch');
+        }
+        console.log(users);
+    })
+   
 })
