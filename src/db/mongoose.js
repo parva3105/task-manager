@@ -19,6 +19,17 @@ const User = mongoose.model('User',{
                 throw new Error('Email is Invalid')
             }
         }
+    }, 
+    password : {
+        type: String,
+        required: true,
+        minLength : 7,
+        trim : true,
+        validate(value){
+            if(value.toLoweCase().includes('password')){
+                throw new Error("Password cannot be password!")
+            }
+        }
     },
     age : {
         type: Number,
@@ -31,29 +42,10 @@ const User = mongoose.model('User',{
     }
 })
 
-// const Tasks = mongoose.model('Tasks',{
-//     description : {
-//         type : String
-//     },
-//     completed : {
-//         type: Boolean
-//     }
-// })
-
-// const first = new Tasks({
-//     description : "Learn Mongoose",
-//     completed : false
-// })
-
-// first.save().then(() => {
-//     console.log(first);
-// }).catch((error) => {
-//     console.log("Error!! ", error);
-// })
-
 const me = new User({
     name : '    Parva Shah ',
-    email:'PARVASHAH310501@GMAIL.COM    '
+    email:'PARVASHAH310501@GMAIL.COM    ',
+    password : 'OkT'
 })
 
 me.save().then(() => {
