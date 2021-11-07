@@ -31,15 +31,21 @@ router.post('/users/logout' , auth , async (req , res) => {
             return token.token !== req.token
         })
         await req.user.save()
-        
+
         res.send()
     }catch(e){
         res.status(500).send()
     }
 })
 
-router.post('/users/logoutall', auth , (req , res) => {
-
+router.post('/users/logoutall', auth , async(req , res) => {
+    try{
+        req.user.tokens = []
+        await req.user.save()
+        res.send()
+    }catch(e){
+        res.status(500).send()
+    }
 })
 
 router.get('/users/me' , auth ,async (req , res) => {
