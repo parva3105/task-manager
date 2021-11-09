@@ -9,6 +9,11 @@ const Task = mongoose.model('Tasks',{
     completed : {
         type: Boolean,
         required : true,
+    },
+    owner : {
+        type : mongoose.Schema.Types.ObjectId,
+        reqiured : true,
+        ref : 'User' //To create Relationship between user model and task mode
     }
 })
 
