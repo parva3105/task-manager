@@ -99,11 +99,19 @@ const upload = multer({
     dest: 'avatar',
     limits : {
         fileSize : 1000000
+    }, 
+    fileFilter(req , file , cb) {
+        if(!file.originalname.match(/\.(jpg|jpeg|png)$/)){
+            return cb(new Error('Please upload an Image File!'))
+        }
+        cb (undefined , true)
     }
 })
 
 router.post('/users/me/avatar', upload.single('avatar') , (req , res) => {
     res.send()
+} , (error , req , res , next) => {
+    res.status(400).send({error : error.message})
 })
 
 module.exports = router
