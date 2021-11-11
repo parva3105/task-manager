@@ -48,10 +48,12 @@ const userSchema = new mongoose.Schema({
             required : true
         }
     }]
+} , {
+    timestamps : true
 })
 
-userSchema.virtual('tasks' , {
-    ref : 'Tasks',
+userSchema.virtual('task' , {
+    ref : 'Task',
     localField : '_id',
     foreignField : 'owner',
 })

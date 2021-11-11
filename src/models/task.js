@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const validator =  require('validator')
 
-const Task = mongoose.model('Tasks',{
+const userSchema = new mongoose.Schema({ 
     description : {
         type : String,
         reqiured : true,
@@ -16,6 +16,9 @@ const Task = mongoose.model('Tasks',{
         reqiured : true,
         ref : 'User' //To create Relationship between user model and task mode
     }
+} , {
+    timestamps: true
 })
+const Task = mongoose.model('Task', userSchema)
 
 module.exports = Task
