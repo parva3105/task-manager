@@ -7,7 +7,7 @@ const sendWelcomeEmail = (email , name) => {
         to: email,
         from: 'workmail.parvashah@gmail.com',
         subject: 'Thanks For Joining in!',
-        text: `Welcom to the app , ${name} . Let me How do you like the app.`
+        text: `Welcom to the app , ${name} . Let me know how do you like the app.`
     })
 }
 
